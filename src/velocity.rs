@@ -36,7 +36,7 @@ pub fn velocity_transform_system(
             //moves the entity to the next step according to the veloty
             transform.translation += velocity.0 * time.delta_seconds();
             //sets the entity's rotation to face the veloty
-            transform.rotation = Quat::from_rotation_arc(Vec3::Y, velocity.0.normalize())
+            transform.rotation = Quat::from_rotation_arc(Vec3::Y, velocity.0.normalize());
         }
     )
 }
