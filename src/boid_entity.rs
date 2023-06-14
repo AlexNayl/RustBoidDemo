@@ -42,10 +42,18 @@ pub fn boid_behaviour_system(
         let other_distances = &component_bundle.1.visible_distances;
         let other_positions = &component_bundle.1.visible_positions;
 
-        for i in 0..other_velocities.len(){
+        let n = other_velocities.len();
+
+        let mut average_position = Vec3::ZERO;
+        let mut average_velocity = Vec3::ZERO;
+
+        for i in 0..n{
             let velocity = other_velocities.get(i).expect("visible vector length mismatch");
             let distance = other_distances.get(i).expect("visible vector length mismatch");
             let position = other_positions.get(i).expect("visible vector length mismatch");
+            //collect average data for alignment and cohesion steps
+            average_position += *position;
+            average_velocity += *velocity;
 
             //avoidance
             if distance < &avoidance_distance{
@@ -54,6 +62,11 @@ pub fn boid_behaviour_system(
                 acceleration -= direction_vector * strength;
             }
         }
+        //prep average data
+        average_position /= n as f32;
+        average_velocity /= n as f32;
+
+        
 
 
         //apply the calculated acceleration
