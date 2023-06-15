@@ -33,9 +33,9 @@ pub fn velocity_transform_system(
     query.for_each_mut(|
         (mut transform,velocity)
         |{
-            //moves the entity to the next step according to the veloty
+            //moves the entity to the next step according to the velocity
             transform.translation += velocity.0 * time.delta_seconds();
-            //sets the entity's rotation to face the veloty
+            //sets the entity's rotation to face the velocity
             transform.rotation = Quat::from_rotation_arc(Vec3::Y, velocity.0.normalize());
         }
     )

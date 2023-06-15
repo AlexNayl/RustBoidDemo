@@ -9,7 +9,7 @@ pub struct BoidEntity{
     visible_positions:Vec<Vec3>
 }
 
-pub fn boid_behaviour_system(
+pub fn boid_behavior_system(
     world : Res<PeriodicWorldBounds>,
     time : Res<Time>,
     mut query : Query<(Entity,&mut BoidEntity, &mut Velocity, &Transform)>
@@ -19,6 +19,8 @@ pub fn boid_behaviour_system(
     let perception_distance = 0.5;
     let avoidance_distance = 0.2;
     let avoidance_multiplier = 10.0;
+    let alignment_multiplier = 2.0;
+    let coheasion_multiplier = 1.0;
 
     let mut combinations = query.iter_combinations_mut();
     while let Some([mut ent1, mut ent2]) = combinations.fetch_next(){
@@ -62,12 +64,22 @@ pub fn boid_behaviour_system(
                 acceleration -= direction_vector * strength;
             }
         }
-        //prep average data
-        average_position /= n as f32;
-        average_velocity /= n as f32;
+        
+        if n > 0 {
+            //prep average data
+            average_position /= n as f32;
+            average_velocity /= n as f32;
+
+            //alignment
+            acceleration += average_velocity * alignment_multiplier;
+
+            //cohesion
+            let direction_to_center = world.difference_within_periodic_bounds(&average_position, &component_bundle.3.translation).normalize_or_zero();
+            acceleration += direction_to_center * coheasion_multiplier;
+        }
 
         
-
+        
 
         //apply the calculated acceleration
         component_bundle.2.0 += acceleration * time.delta_seconds();

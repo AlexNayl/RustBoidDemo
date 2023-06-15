@@ -1,10 +1,10 @@
 use bevy::{prelude::*, render::camera::ScalingMode};
 use super::constrained_world::PeriodicWorldBounds;
 
-//distance outide of the camera's view that the world boundary is set at, prevents user from seeing teleport.
+//distance outside of the camera's view that the world boundary is set at, prevents user from seeing teleport.
 const WORLD_BOUNDARY_MARGIN:f32 = 0.05;
 
-//These camera settings allow the window to resize and reshape while keeping the entitys size on screen realtivly constant.
+//These camera settings allow the window to resize and reshape while keeping the entities size on screen relatively constant.
 pub fn get_camera_bundle() -> Camera2dBundle{
     
     return Camera2dBundle{

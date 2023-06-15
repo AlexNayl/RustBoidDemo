@@ -15,7 +15,7 @@ fn main() {
     .add_system(velocity::velocity_transform_system)
     .add_system(constrained_world::periodic_boundary_system)
     .add_system(camera::world_resize_system)
-    .add_system(boid_entity::boid_behaviour_system)
+    .add_system(boid_entity::boid_behavior_system)
     .add_startup_system(startup_system)
     .insert_resource(constrained_world::PeriodicWorldBounds{min: Vec3::ZERO, max: Vec3::ONE})
     .run();
