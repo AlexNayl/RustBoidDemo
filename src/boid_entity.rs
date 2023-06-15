@@ -20,7 +20,7 @@ pub fn boid_behavior_system(
     let avoidance_distance = 0.2;
     let avoidance_multiplier = 10.0;
     let alignment_multiplier = 2.0;
-    let coheasion_multiplier = 1.0;
+    let coheasion_multiplier = 2.0;
 
     let mut combinations = query.iter_combinations_mut();
     while let Some([mut ent1, mut ent2]) = combinations.fetch_next(){

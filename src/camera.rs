@@ -9,7 +9,7 @@ pub fn get_camera_bundle() -> Camera2dBundle{
     
     return Camera2dBundle{
         projection: OrthographicProjection{
-            scaling_mode: ScalingMode::FixedVertical(2.0),
+            scaling_mode: ScalingMode::FixedVertical(5.0),
             ..Default::default()
         },
         ..Default::default()

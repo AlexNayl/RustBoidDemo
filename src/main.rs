@@ -7,7 +7,7 @@ mod camera;
 mod boid_entity;
 mod util;
 
-const NUM_BOID_ENTITIES: usize = 10;
+const NUM_BOID_ENTITIES: usize = 100;
 
 fn main() {
     App::new()

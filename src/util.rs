@@ -6,5 +6,5 @@ pub fn new_2d_unit_rand() -> Vec2{
     return Vec2{
         x: (rng.gen::<f32>() - 0.5),
         y: (rng.gen::<f32>() - 0.5)
-    }.normalize()
+    }
 }
