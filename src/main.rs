@@ -11,7 +11,15 @@ const NUM_BOID_ENTITIES: usize = 100;
 
 fn main() {
     App::new()
-    .add_plugins(DefaultPlugins)
+    .add_plugins(DefaultPlugins.set(WindowPlugin {
+        primary_window: Some(Window {
+            // provide the ID selector string here
+            canvas: Some("#bevy".into()),
+            // ... any other window properties ...
+            ..default()
+        }),
+        ..default()
+    }))
     .add_system(velocity::velocity_transform_system)
     .add_system(constrained_world::periodic_boundary_system)
     .add_system(camera::world_resize_system)
